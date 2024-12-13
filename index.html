@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stylish Dark Mode Page</title>
+    <style>
+        /* General reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #121212;
+            color: #f0f0f0;
+            overflow-x: hidden;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 4rem;
+            color: #00d4ff;
+            text-shadow: 0 0 10px #00d4ff, 0 0 20px #00bfff;
+            animation: glow 1.5s infinite;
+        }
+
+        p {
+            font-size: 1.5rem;
+            color: #c1c1c1;
+            margin-top: 10px;
+        }
+
+        @keyframes glow {
+            0%, 100% {
+                text-shadow: 0 0 10px #00d4ff, 0 0 20px #00bfff;
+            }
+            50% {
+                text-shadow: 0 0 20px #00bfff, 0 0 40px #00aaff;
+            }
+        }
+
+        .button {
+            margin-top: 20px;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            color: #121212;
+            background: linear-gradient(135deg, #00bfff, #007fff);
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 191, 255, 0.4);
+        }
+
+        .button:active {
+            transform: translateY(0);
+            box-shadow: 0 5px 10px rgba(0, 191, 255, 0.2);
+        }
+
+        .login-form {
+            background: #1e1e1e;
+            border-radius: 10px;
+            padding: 30px;
+            width: 100%;
+            max-width: 400px;
+            margin-top: 30px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .login-form input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            background-color: #333;
+            border: 1px solid #444;
+            border-radius: 5px;
+            color: #fff;
+        }
+
+        .login-form button {
+            width: 100%;
+            padding: 12px;
+            background-color: #00bfff;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            color: #121212;
+            cursor: pointer;
+        }
+
+        .login-form button:hover {
+            background-color: #007fff;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 40px 20px;
+            width: 80%;
+        }
+
+        .card {
+            background: #1e1e1e;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: left;
+            color: #fff;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .card h3 {
+            color: #00d4ff;
+        }
+
+        .card p {
+            font-size: 1rem;
+            color: #c1c1c1;
+        }
+
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #888;
+        }
+
+        footer a {
+            color: #00bfff;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Dark Mode</h1>
+        <p>Experience sleek design and smooth animations.</p>
+        
+        <!-- Login Form -->
+        <div class="login-form" id="loginForm">
+            <h3>Login</h3>
+            <form id="loginFormElement">
+                <input type="text" placeholder="Username" id="username" required>
+                <input type="password" placeholder="Password" id="password" required>
+                <button type="submit">Login</button>
+            </form>
+            <p id="loginError" style="color: red; display: none;">Invalid username or password.</p>
+        </div>
+
+        <button class="button" id="exploreButton" style="display: none;">Explore More</button>
+
+        <div class="cards">
+            <div class="card">
+                <h3>Feature One</h3>
+                <p>Discover amazing content and features in this section.</p>
+            </div>
+            <div class="card">
+                <h3>Feature Two</h3>
+                <p>Stay tuned for more updates and exciting news!</p>
+            </div>
+            <div class="card">
+                <h3>Feature Three</h3>
+                <p>Enhance your productivity with our tools and resources.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        Made with ❤️ by <a href="#">Prashant</a>
+    </footer>
+
+    <script>
+        // Predefined credentials
+        const credentials = [
+            { username: "user1", password: "password1" },
+            { username: "user2", password: "password2" }
+        ];
+
+        // Handle login form submission
+        const loginForm = document.getElementById('loginFormElement');
+        const loginError = document.getElementById('loginError');
+        const exploreButton = document.getElementById('exploreButton');
+        const loginFormContainer = document.getElementById('loginForm');
+
+        loginForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // Check credentials
+            const user = credentials.find(cred => cred.username === username && cred.password === password);
+
+            if (user) {
+                // Hide login form and show Explore button
+                loginFormContainer.style.display = 'none';
+                exploreButton.style.display = 'inline-block';
+            } else {
+                // Show error message if credentials are incorrect
+                loginError.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>
